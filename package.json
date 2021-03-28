@@ -16,7 +16,12 @@
     "url": "https://github.com/DaliaAbdelghani/city_explorer_api/issues"
   },
   "homepage": "https://github.com/DaliaAbdelghani/city_explorer_api#readme",
+
   "devDependencies": {
     "nodemon": "^2.0.7"
+
+  "dependencies": {
+    "express": "^4.17.1"
+
   }
 }
