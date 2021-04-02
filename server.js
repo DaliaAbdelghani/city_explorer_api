@@ -10,3 +10,8 @@ app.use(cors()); // Allow access to api from another domain
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
+
+// app.on('request') {
+//   console.log(request.url);
+//   console.log(request.method);
+// }; 
