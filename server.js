@@ -1,24 +1,17 @@
+'use strict';
 
-const express = require ('express'); // loading express module  --> in the terminal => npm install express
+const express = require('express'); // Load the express module into our script
+const cors = require('cors');
+require('dotenv').config();
+const app = express(); // Creates a server application.
+const PORT = process.env.PORT || 3000;
+app.use(cors()); // Allow access to api from another domain
 
-const app = express(); // the new created server
-const PORT = 3000;
-
-const handleRequest = (request, response) => {
-  const weather = require('./data/weather.json');
-  weather.forEach(element => {
-    if ( weather === request.query.weather){
-      response.status(200).json(weather);
-    } 
-  });
-  response.json(weather);
-
-};
-
-app.get ('/weather', handleRequest);
-
-app.listen( PORT, () =>{
-
-  console.log (`server is listening on port ${PORT}`)
-
+app.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`);
 });
+
+// app.on('request') {
+//   console.log(request.url);
+//   console.log(request.method);
+// }; 
