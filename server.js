@@ -14,7 +14,7 @@ app.listen(PORT, () => {
 
 
 app.get('/location',(handleLocation));
-app.get('/location',(handleWeather));
+app.get('/weather',(handleWeather));
 
 function handleLocation (req , res){ 
   let query = req.query.city;
@@ -61,6 +61,7 @@ function CityLocation (query,displayName,lat,long){
   this.latitude=lat;
   this.longitude=long;
 }
+
 
 function CityWeather (query, weatherDesc, time) {
   this.search_query= query;
