@@ -5,9 +5,11 @@ const cors = require('cors');
 require('dotenv').config();
 const app = express(); // Creates a server application.
 const PORT = process.env.PORT || 3000;
+
 const GEOCODE_API_KEY = process.env.GEOCODE_API_KEY;
 app.use(cors()); // Allow access to api from another domain
 const superagent = require('superagent');
+
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
@@ -17,19 +19,23 @@ app.listen(PORT, () => {
 app.get('/location',(handleLocation));
 app.get('/weather',(handleWeather));
 
-function handleLocation (req , res){
+
+function handleLocation (req , res){ 
   let query = req.query.city;
   let locationObj = getLocationData(query);
   try { res.status(200).send(locationObj)}
   catch(error){res.status(500).send('An error occured '+error)}
 }
 
-function handleWeather (req , res){
+
+function handleWeather (req , res){ 
+
   let query = req.query.city;
   let weatherObj = getWeatherData(query);
   try { res.status(200).send(weatherObj)}
   catch(error){res.status(500).send('An error occured '+error)}
 }
+
 
 // function getLocationData(query) {
 //   let locationData = require ('./data/location.json');
@@ -76,6 +82,16 @@ function Location(city, geoData) {
 }
 
 
+function getLocationData(query) {
+  let locationData = require ('./data/location.json');
+  let displayName= locationData[0].display_name;
+  let latitude=locationData[0].lat;
+  let longitude=locationData[0].lon;
+  let resObj= new CityLocation (query,displayName,latitude,longitude);
+  return resObj;
+};
+
+
 function getWeatherData(query) {
   let weatherData = require('./data/weather.json');
   let weatherArray=[];
@@ -105,6 +121,7 @@ function CityWeather (query, weatherDesc, time) {
   this.forecast=weatherDesc;
   this.time=time;
 }
+
 
 /*
 
@@ -192,3 +209,4 @@ app.listen(PORT, () => console.log(`App is listening on ${PORT}`));
 
 
 */
+
